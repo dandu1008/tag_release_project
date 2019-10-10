@@ -6,7 +6,7 @@ tag=$(echo $CODEBUILD_WEBHOOK_TRIGGER | cut -d / -f2)
 vars=$(git log -1 "refs/tags/$tag" --decorate=short | awk -F'[()]' '{print $2}')
 IFS=, read -ra arr <<< "$vars"
 echo $vars
-branch=$(echo "${arr[@]:(-1)}" | sed 's/ //g' | | cut -d / -f2)
+branch=$(echo "${arr[@]:(-1)}" | sed 's/ //g' | cut -d / -f2)
 echo $branch
 echo "$tag belongs to $branch"
 if [ "$branch" = "HEAD" ]; then branch=master; fi
